@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WishList.Models;
 using WishList.Models.AccountViewModels;
+using WishList.Views.Account;
 
 namespace WishList.Controllers
 {
@@ -49,6 +50,32 @@ namespace WishList.Controllers
                 return View(model);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View("Login");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var signIn = _signInManager.PasswordSignInAsync(model.Email, model.Password,
+                false, false);
+            if (!signIn.Result.Succeeded)
+            {
+                ModelState.AddModelError("", errorMessage: "Invalid Login Attempt");
+            }
+            return RedirectToAction("Index", "Item");
         }
     }
 }

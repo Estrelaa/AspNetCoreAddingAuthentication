@@ -8,17 +8,17 @@ namespace WishList.Controllers
     [Authorize]
     public class AccountController : Controller 
     {
-        public readonly AccountController(UserManager<ApplicationUser> userManager, 
+        public  AccountController(UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager) 
         {
             
         }
-        private readonly UserManager<ApplicationUser> _userManager()
+        private UserManager<ApplicationUser> _userManager()
         {
             
         }
 
-        private readonly SignInManager<ApplicationUser> _signInManager()
+        private  SignInManager<ApplicationUser> _signInManager()
         {
             
         }
